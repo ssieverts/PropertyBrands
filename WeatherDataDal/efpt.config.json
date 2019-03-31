@@ -1,0 +1,14 @@
+﻿{
+  "ContextClassName": "WeatherDataContext",
+  "DefaultDacpacSchema": null,
+  "IdReplace": false,
+  "IncludeConnectionString": true,
+  "OutputPath": "Temp",
+  "ProjectRootNamespace": "WeatherDataDal",
+  "SelectedToBeGenerated": 0,
+  "Tables": [{ "HasPrimaryKey": true, "Name": "dbo.Weather" }, { "HasPrimaryKey": true, "Name": "dbo.WeatherData" }],
+  "UseDatabaseNames": false,
+  "UseFluentApiOnly": false,
+  "UseHandleBars": false,
+  "UseInflector": true
+}

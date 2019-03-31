@@ -1,0 +1,15 @@
+{
+  "AppSetting": {
+    "ZipCodeFreq": "30606|15, 30606|15,30004|15,30005|15", //Zip|Freq in minutes
+    "WeatherDataBaseUrl": "https://api.openweathermap.org/data/2.5/",
+    "WeatherDataAction": "weather?zip=",
+    "WeatherDataAPIKey": "&APPID=b7fbc7d7ee9d8f0f0864224e26b40890"
+  },
+  "connectionString": {
+    "DefaultConnection":
+      "Data Source=(local);Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+  },
+  "tools": {
+    "Microsoft.EntityFrameworkCore.Tools": "2.2.2"
+  }
+}
