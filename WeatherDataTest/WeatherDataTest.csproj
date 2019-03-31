@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeatherDataDal\WeatherDataDal.csproj" />
-    <ProjectReference Include="..\WeatherDataRetrival\WeatherDataRetrieval.csproj" />
   </ItemGroup>
 
 </Project>
