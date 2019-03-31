@@ -37,7 +37,7 @@ namespace WeatherDataRetrieval
         /// <returns></returns>
         public async Task<bool> Run()
         {
-            _logger.LogInformation("GetWeatherData - Run Started");
+            _logger.LogDebug("GetWeatherData - Run Started");
             try
             {
                 if (Configure())
@@ -63,6 +63,7 @@ namespace WeatherDataRetrieval
         /// </summary>
         private async Task GetWeatherDataByZip()
         {
+            _logger.LogDebug("GetWeatherDataByZip - Run Started");
             try
             {
                 // loop thru zip codes
@@ -91,6 +92,7 @@ namespace WeatherDataRetrieval
         /// </summary>
         private bool Configure()
         {
+            _logger.LogDebug("Configure - Run Started");
             try
             {
                 // Read and parse config values
@@ -128,6 +130,7 @@ namespace WeatherDataRetrieval
         /// <returns></returns>
         private async Task<WeatherData> GetWeatherDataAsync(string BaseUrl, string BaseAction)
         {
+            _logger.LogDebug("GetWeatherDataAsync - Run Started");
             WeatherData weatherData = null;
             try
             {

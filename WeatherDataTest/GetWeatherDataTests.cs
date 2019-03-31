@@ -1,48 +1,52 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using WeatherDataDal.Models;
 using WeatherDataRetrieval;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace WeatherDataTest
 {
     [TestFixture]
     public class GetWeatherDataTests
     {
-        private MockRepository mockRepository;
-
-        private Mock<WeatherDataContext> mockWeatherDataContext;
-        private Mock<ILogger> mockLogger;
-
         [SetUp]
         public void SetUp()
         {
-            this.mockRepository = new MockRepository(MockBehavior.Default);
+            mockRepository = new MockRepository(MockBehavior.Default);
 
-            this.mockWeatherDataContext = this.mockRepository.Create<WeatherDataContext>();
-            this.mockLogger = this.mockRepository.Create<ILogger>();
+            mockLogger = mockRepository.Create<ILogger>();
+
+            mockWeatherDataContext = new Mock<WeatherDataContext>();
+            mockSet = new Mock<DbSet<WeatherData>>();
+            mockWeatherDataContext.Setup(m => m.WeatherData).Returns(mockSet.Object);
         }
 
         [TearDown]
         public void TearDown()
         {
-            this.mockRepository.VerifyAll();
+            mockRepository.VerifyAll();
         }
 
-        //[Test]
-        //public void Run_StateUnderTest_ExpectedBehavior()
-        //{
-        //    // Arrange
-        //    var unitUnderTest = new GetWeatherData(mockWeatherDataContext, mockLogger);
+        private MockRepository mockRepository = new MockRepository(MockBehavior.Loose);
+        private Mock<WeatherDataContext> mockWeatherDataContext;
+        private Mock<DbSet<WeatherData>> mockSet;
+        private Mock<ILogger> mockLogger;
+        private readonly string[] forbidden = {"Failed"};
 
-        //    // Act
-        //    var result = unitUnderTest.Run();
+        [Test]
+        public async Task Run_should_not_log_failure()
+        {
+            var logger = (ListLogger) TestFactory.CreateLogger(LoggerTypes.List);
+            var getWeatherData = new GetWeatherData(null, logger);
 
-        //    // Assert
-        //    if (!result)
-        //        Assert.Fail();
-        //    else
-        //        Assert.IsTrue(result);
-        //}
+            var result = await getWeatherData.Run();
+            var msg = new List<string> {logger.Logs[0]};
+            Assert.Contains("GetWeatherData - Run Started", msg);
+            Assert.IsEmpty(msg.Intersect(forbidden));
+        }
     }
 }
