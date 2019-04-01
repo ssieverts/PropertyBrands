@@ -64,7 +64,7 @@ namespace WeatherDataDal.Models
                 entity.HasIndex(e => e.WeatherDataRefId)
                     .IsUnique();
 
-                entity.Property(e => e.RefId).ValueGeneratedNever();
+                entity.Property(e => e.RefId).HasDefaultValueSql("(newid())");
             });
 
             modelBuilder.Entity<Weather>(entity =>

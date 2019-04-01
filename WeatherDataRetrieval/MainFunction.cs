@@ -16,7 +16,7 @@ namespace WeatherDataRetrieval
         private static readonly WeatherDataContext context = new WeatherDataContext();
 
         [FunctionName("MainFunction")]
-        public static async Task RunAsync([TimerTrigger("0 */15 * * * *")] TimerInfo myTimer)
+        public static async Task RunAsync([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
         {
             try
             {
